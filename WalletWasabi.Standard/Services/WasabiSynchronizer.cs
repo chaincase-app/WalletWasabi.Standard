@@ -35,10 +35,12 @@ namespace WalletWasabi.Services
 
 		private BackendStatus _backendStatus;
 
+		#pragma warning disable IDE1006
 		/// <summary>
 		/// 0: Not started, 1: Running, 2: Stopping, 3: Stopped
 		/// </summary>
-		private long _running;
+		protected long _running;
+		#pragma warning restore IDE1006
 
 		private long _blockRequests; // There are priority requests in queue.
 
@@ -112,7 +114,7 @@ namespace WalletWasabi.Services
 
 		public bool IsRunning => Interlocked.Read(ref _running) == 1;
 
-		private CancellationTokenSource Cancel { get; set; }
+		protected CancellationTokenSource Cancel { get; set; }
 
 		public bool AreRequestsBlocked() => Interlocked.Read(ref _blockRequests) == 1;
 
